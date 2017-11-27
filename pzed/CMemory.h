@@ -63,16 +63,8 @@ public:
 	template<typename T>
 	static T read(HANDLE hProcess, DWORD dwAddress)
 	{
-		static_assert(std::is_trivially_copyable<T>::value, "Invalid RPM/WPM type");
-
-		if (isValidProcessHandle(hProcess))
-		{
-			// ?
-			T value = T();
-			ReadProcessMemory(hProcess, reinterpret_cast<LPCVOID>(dwAddress), &value, sizeof(T), 0);
-			return value;
-		}
+		T value = T();
+		if (read<T>(hProcess, dwAddress, value) { return value; }
 		// throw
-		return false;
 	}
 };
