@@ -10,22 +10,17 @@ private:
 	HANDLE m_hProcess;
 
 	// mapa? ró¿ne iloœci i nazwy modu³ów?
-	//DWORD m_dwBaseAddress;
 	DWORD m_dwClientAddress;
 	DWORD m_dwEngineAddress;
-
-	// ustawiæ na true jak wszystko bêdzie gucci ustawione
-	bool m_setUp;
 
 public:
 	CProcess() :
 		m_wsProcessName{},
 		m_dwPId{ 0 },
 		m_hProcess{ INVALID_HANDLE_VALUE },
-		//m_dwBaseAddress{ 0 },
 		m_dwClientAddress{ 0 },
-		m_dwEngineAddress{ 0 },
-		m_setUp{ false } {}
+		m_dwEngineAddress{ 0 }
+    {}
 
 	~CProcess() { CMemory::properlyCloseHandle(m_hProcess); }
 
@@ -38,7 +33,6 @@ public:
 			&& m_dwEngineAddress != 0;
 	}
 
-	// kolizja nazw
 	DWORD getId() { return m_dwPId; }
 	HANDLE getHandle() { return m_hProcess; }
 	// tutaj by by³o przyjemniej mieæ ogóln¹ funkcjê do zwracania adresów modu³ów,

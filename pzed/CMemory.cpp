@@ -8,7 +8,7 @@ DWORD CMemory::getPId(const std::wstring& processName)
 {
     DWORD pid;
     if (getPId(processName, pid)) { return pid; }
-    // throw here
+    throw std::invalid_argument("no process with such name running.");
 }
 
 bool CMemory::getPId(const std::wstring& processName, DWORD& pid)
@@ -37,7 +37,7 @@ DWORD CMemory::getModule(const std::wstring& moduleName, DWORD pid)
 {
     DWORD dwAddress;
     if (getModule(moduleName, pid, dwAddress)) { return dwAddress; }
-    // throw here
+    throw std::invalid_argument("no module with such name.");
 }
 
 bool CMemory::getModule(const std::wstring& moduleName, DWORD pid, DWORD& dwAddress)
