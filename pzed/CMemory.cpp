@@ -7,7 +7,7 @@
 DWORD CMemory::getPId(const std::wstring& processName)
 {
     DWORD pid;
-    if (getPId(processName, pid) { return pid; }
+    if (getPId(processName, pid)) { return pid; }
     // throw here
 }
 
@@ -36,7 +36,7 @@ bool CMemory::getPId(const std::wstring& processName, DWORD& pid)
 DWORD CMemory::getModule(const std::wstring& moduleName, DWORD pid)
 {
     DWORD dwAddress;
-    if (getModule(moduleName, pid, dwAddress) { return dwAddress; }
+    if (getModule(moduleName, pid, dwAddress)) { return dwAddress; }
     // throw here
 }
 
