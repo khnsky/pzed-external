@@ -21,7 +21,7 @@ public:
     static bool isValidProcessHandle(HANDLE h) { return isValidHandle(h) && h > 0; }
     static bool properlyCloseHandle(HANDLE h)
     {
-        auto const a = CloseHandle(h);
+        const auto a = CloseHandle(h);
         assert(a && "handle not closed properly");
         return a;
     }
@@ -72,7 +72,7 @@ public:
     static T read(HANDLE hProcess, DWORD dwAddress)
     {
         T value = T();
-        if (read<T>(hProcess, dwAddress, value) { return value; }
-        // throw
+        if (read<T>(hProcess, dwAddress, value)) { return value; }
+        // throw?
     }
 };
