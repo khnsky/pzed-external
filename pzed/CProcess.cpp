@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-bool CProcess::init(const std::wstring& processName)
+bool CProcess::init(const std::wstring& processName, const std::initializer_list<std::wstring>& moduleList)
 {
 	m_wsProcessName = processName;
 
@@ -15,10 +15,11 @@ bool CProcess::init(const std::wstring& processName)
         m_hProcess = CMemory::getPHandle(m_dwPId);
         std::cout << "opened handle to process" << std::endl;
 
-        m_dwClientAddress = CMemory::getModule(L"client.dll", m_dwPId);
-        std::cout << "found client.dll module" << std::endl;
-        m_dwEngineAddress = CMemory::getModule(L"engine.dll", m_dwPId);
-        std::cout << "found engine.dll module" << std::endl;
+        for (const auto& a : moduleList)
+        {
+            m_mModules[a] = CMemory::getModule(a, m_dwPId);
+            std::wcout << L"found " << a << L" moudle" << std::endl;
+        }
     }
     catch (const std::exception& e)
     {
