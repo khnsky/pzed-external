@@ -27,8 +27,9 @@ public:
 	bool isSetUp() const
 	{
         return m_dwPId != 0
-            && CMemory::isValidProcessHandle(m_hProcess)
-            && m_mModules.count(0) != 1;
+            && CMemory::isValidProcessHandle(m_hProcess);
+            // to wywala, oczekuje klucza, a nie wartoœci
+            //&& m_mModules.count(0) != 1;
 	}
 
 	DWORD getId() const { return m_dwPId; }
