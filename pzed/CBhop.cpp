@@ -10,9 +10,11 @@ extern CProcess process;
 
 void bhop()
 {
+    // need to check if csgo process is still running, what happens if writting to not running process?
     while (!process.isSetUp()) 
     {
         // should never be called if csgo is not set up
+        // no reason for this unless implemented multithreading
         std::this_thread::sleep_for(std::chrono::seconds(2));
     }
     while (true)
@@ -31,6 +33,4 @@ void bhop()
         // less than 1000/128 (128 - highest tickrate in cs)
         std::this_thread::sleep_for(std::chrono::milliseconds(5));
 	}
-
-    // throw? wait and try again? (no reason unless implemented multithreading?
 }

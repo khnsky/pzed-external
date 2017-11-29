@@ -8,6 +8,7 @@ bool CProcess::init(const std::wstring& processName, const std::initializer_list
 {
 	m_wsProcessName = processName;
 
+    // maybe use static variables to not search for pid, handle etc. twice or more when module or something is missing?
     try
     {
         m_dwPId = CMemory::getPId(processName);
