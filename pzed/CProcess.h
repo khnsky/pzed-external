@@ -8,14 +8,14 @@
 class CProcess
 {
 private:
-	std::wstring m_wsProcessName;
+	std::string m_sProcessName;
 	DWORD m_dwPId;
 	HANDLE m_hProcess;
-    std::map<std::wstring, DWORD> m_mModules;
+    std::map<std::string, DWORD> m_mModules;
 
 public:
 	CProcess() :
-		m_wsProcessName{},
+		m_sProcessName{},
 		m_dwPId{ 0 },
 		m_hProcess{ INVALID_HANDLE_VALUE },
         m_mModules{}
@@ -23,7 +23,7 @@ public:
 
 	~CProcess() { CMemory::properlyCloseHandle(m_hProcess); }
 
-	bool init(const std::wstring& processName, const std::initializer_list<std::wstring>& mouduleList);
+	bool init(const std::string& processName, const std::initializer_list<std::string>& mouduleList);
 	bool isSetUp() const
 	{
         return m_dwPId != 0
@@ -37,6 +37,6 @@ public:
 
 	DWORD getId() const { return m_dwPId; }
 	HANDLE getHandle() const { return m_hProcess; }
-    const std::map<std::wstring, DWORD>& getModules() const { return m_mModules; }
-    DWORD getModule(const std::wstring& moduleName) const { return m_mModules.at(moduleName); }
+    const std::map<std::string, DWORD>& getModules() const { return m_mModules; }
+    DWORD getModule(const std::string& moduleName) const { return m_mModules.at(moduleName); }
 };

@@ -4,9 +4,9 @@
 
 #include <iostream>
 
-bool CProcess::init(const std::wstring& processName, const std::initializer_list<std::wstring>& moduleList)
+bool CProcess::init(const std::string& processName, const std::initializer_list<std::string>& moduleList)
 {
-	m_wsProcessName = processName;
+	m_sProcessName = processName;
 
     // maybe use static variables to not search for pid, handle etc. twice or more when module or something is missing?
     try
@@ -19,7 +19,7 @@ bool CProcess::init(const std::wstring& processName, const std::initializer_list
         for (const auto& a : moduleList)
         {
             m_mModules[a] = CMemory::getModule(a, m_dwPId);
-            std::wcout << L"found " << a << L" moudle" << std::endl;
+            std::cout << "found " << a << " moudle" << std::endl;
         }
     }
     catch (const std::exception& e)

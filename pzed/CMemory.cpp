@@ -52,10 +52,12 @@ bool CMemory::getModule(const std::wstring& moduleName, DWORD pid, DWORD& dwAddr
         {
             if (moduleEntry32.szModule == moduleName)
             {
+                properlyCloseHandle(h_moduleSnapshot);
                 dwAddress = reinterpret_cast<DWORD>(moduleEntry32.modBaseAddr);
                 return true;
             }
         } while (Module32Next(h_moduleSnapshot, &moduleEntry32));
     }
+    properlyCloseHandle(h_moduleSnapshot);
     return false;
 }
