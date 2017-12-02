@@ -24,6 +24,8 @@ public:
 	~CProcess() { CMemory::properlyCloseHandle(m_hProcess); }
 
 	bool init(const std::string& processName, const std::initializer_list<std::string>& mouduleList);
+    bool init(const std::string& processName) { return init(processName, {}); }
+
 	bool isSetUp() const
 	{
         return m_dwPId != 0
