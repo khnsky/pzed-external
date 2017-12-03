@@ -7,9 +7,6 @@
 
 #include <Windows.h>
 
-// TODO: add fuctions accepting wchar*,
-// char* and strings
-
 // TODO: add throws and exceptions handling
 
 class CMemory
