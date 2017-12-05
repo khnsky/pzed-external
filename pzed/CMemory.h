@@ -25,7 +25,7 @@ public:
 
     // only works for single byte characters
     // implement better solution
-    static std::wstring toWstring(const std::string& s) { return std::wstring(s.cbegin(), s.end()); }
+    static std::wstring toWString(const std::string& s) { return std::wstring(s.cbegin(), s.end()); }
 
     /**
      * get process id of said process
@@ -33,9 +33,9 @@ public:
      * @ret process id
      */
     static DWORD getPId(const std::wstring& processName);
-    static DWORD getPId(const std::string& processName) { return getPId(toWstring(processName)); }
+    static DWORD getPId(const std::string& processName) { return getPId(toWString(processName)); }
     static bool getPId(const std::wstring& processName, DWORD& pid);
-    static bool getPId(const std::string& processName, DWORD& pid) { return getPId(toWstring(processName), pid); }
+    static bool getPId(const std::string& processName, DWORD& pid) { return getPId(toWString(processName), pid); }
 
     // for now opens only with one access rights, only one needed for now
     // maybe change in future, have more options, add enumerator with access rights?
@@ -43,11 +43,11 @@ public:
     static void getPHandle(DWORD pid, HANDLE& h) { h = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid); }
 
     static DWORD getModule(const std::wstring& moduleName, DWORD pid);
-    static DWORD getModule(const std::string& moduleName, DWORD pid) { return getModule(toWstring(moduleName), pid); }
+    static DWORD getModule(const std::string& moduleName, DWORD pid) { return getModule(toWString(moduleName), pid); }
     static bool getModule(const std::wstring& moduleName, DWORD pid, DWORD& dwAddress);
     static bool getModule(const std::string& moduleName, DWORD pid, DWORD& dwAddress) 
     { 
-        return getModule(toWstring(moduleName), pid, dwAddress); 
+        return getModule(toWString(moduleName), pid, dwAddress); 
     }
 
     // maybe add this function getting param value by value for primitive types,
