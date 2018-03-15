@@ -8,13 +8,21 @@ bool CProcess::init(const std::string& processName, const std::initializer_list<
 {
 	m_sProcessName = processName;
 
-    // maybe use static variables to not search for pid, handle etc. twice or more when module or something is missing?
     try
     {
-        m_dwPId = CMemory::getPId(processName);
-        std::cout << "found PId." << std::endl;
-        m_hProcess = CMemory::getPHandle(m_dwPId);
-        std::cout << "opened handle to process" << std::endl;
+        static DWORD pid = []
+        {
+            DWORD p = CMemory::getPId(processName);
+            std::cout << "found PId." << std::endl;
+            return p;
+        }();
+
+        static HANDLE hProcess = []
+        {
+            h = CMemory::getPHandle(m_dwPId);
+            std::cout << "opened handle to process" << std::endl;
+            return h;
+        }();
 
         for (const auto& a : moduleList)
         {
@@ -22,6 +30,9 @@ bool CProcess::init(const std::string& processName, const std::initializer_list<
             std::cout << "found " << a << " moudle" << std::endl;
         }
     }
+    m_dwPId = pid;
+    m_hProcess = hProcess;
+    m_mModules = modules;
     catch (const std::exception& e)
     {
         std::cout << e.what() << std::endl;
