@@ -19,7 +19,7 @@ bool CProcess::init(const std::string& processName, const std::initializer_list<
 
         static HANDLE hProcess = []
         {
-            h = CMemory::getPHandle(m_dwPId);
+            HANDLE h = CMemory::getPHandle(m_dwPId);
             std::cout << "opened handle to process" << std::endl;
             return h;
         }();
