@@ -10,14 +10,14 @@ bool CProcess::init(const std::string& processName, const std::initializer_list<
 
     try
     {
-        static DWORD pid = []
+        static DWORD pid = [&]
         {
             DWORD p = CMemory::getPId(processName);
             std::cout << "found PId." << std::endl;
             return p;
         }();
 
-        static HANDLE hProcess = []
+        static HANDLE hProcess = [&]
         {
             HANDLE h = CMemory::getPHandle(m_dwPId);
             std::cout << "opened handle to process" << std::endl;
@@ -29,10 +29,9 @@ bool CProcess::init(const std::string& processName, const std::initializer_list<
             m_mModules[a] = CMemory::getModule(a, m_dwPId);
             std::cout << "found " << a << " moudle" << std::endl;
         }
+        m_dwPId = pid;
+        m_hProcess = hProcess;
     }
-    m_dwPId = pid;
-    m_hProcess = hProcess;
-    m_mModules = modules;
     catch (const std::exception& e)
     {
         std::cout << e.what() << std::endl;
